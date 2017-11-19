@@ -16,6 +16,7 @@ public:
      */
     virtual void show(string toShow) const;
 
+    virtual void printScore(GeneralPlayer* player1, GeneralPlayer* player2) const;
 };
 
 

@@ -5,7 +5,7 @@
 #ifndef EX2_REVERSIRULES_H
 #define EX2_REVERSIRULES_H
 
-
+#include "Cell.h"
 #include "Board.h"
 #include "GeneralPlayer.h"
 #include "Visualization.h"
@@ -67,13 +67,13 @@ public:
      * finds possible moves for current player turn
      * @return a vector containing strings of optional moves
      */
-    vector<string> getMovesForPlayer();
+    void getMovesForPlayer();
     /**
      *
      * @param sign char sign of a specific player
      * @return all locations of that sign in the board
      */
-    vector<string> getAllLocations(char sign);
+    vector<point_t> getAllLocations(char sign);
     /**
      * return possible moves of a specific disk
      * @param current sign of the current player
@@ -82,7 +82,7 @@ public:
      * @param another the sign of the other player
      * @return vector of possible moves for a specific disk
      */
-    vector<string> possibleLocation(char current, int i, int j, char another);
+    vector<cell_t> possibleLocation(char current, point_t point, char another);
     /**
      * comparing scores and declaring
      * who won after showing the last board
@@ -94,6 +94,7 @@ private:
     GeneralPlayer* blackP_;
     GeneralPlayer* now_;
     GeneralPlayer* later_;
+    vector<cell_t> movesForCurrentPlayer;
     Visualization* screen_;
 };
 

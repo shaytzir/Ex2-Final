@@ -4,8 +4,10 @@
 //
 
 #include "ReversiRules.h"
+#include "Cell.h"
 #include <algorithm>
 #include <sstream>
+#include <cstring>
 
 
 ReversiRules::ReversiRules(GeneralPlayer* black, GeneralPlayer* white, Visualization* screen) {
@@ -15,6 +17,7 @@ ReversiRules::ReversiRules(GeneralPlayer* black, GeneralPlayer* white, Visualiza
     now_ = blackP_;
     later_ = whiteP_;
     this->screen_ = screen;
+    getMovesForPlayer();
 }
 
 ReversiRules::~ReversiRules() {
@@ -23,40 +26,40 @@ ReversiRules::~ReversiRules() {
     //delete blackP;
 }
 
-vector<string> ReversiRules::getMovesForPlayer() {
+void ReversiRules::getMovesForPlayer() {
     //knowing for which player were looking for moves
     char sign = now_->getSign();
     //finding out all locations of the current player on the board
-    vector<string> locations = getAllLocations(sign);
+    vector<point_t> locations = getAllLocations(sign);
 
-    vector<string> movesForPlayer;
+   // vector<cell_t> movesForPlayer;
     //for each location of the current player -
     for (int i = 0; i < locations.size(); i++) {
-        int row = locations.at(i).at(1) - '0'; //at 1 place "(i,j)"
-        int col = locations.at(i).at(3) - '0';//at 3 place "(i,j)"
+      /*  int row = locations.at(i).x; //at 1 place "(i,j)"
+        int col = locations.at(i).y;//at 3 place "(i,j)"*/
         //look for optional moves
-        vector<string> possibleMovesForOneDisk = possibleLocation(now_->getSign(), row, col, later_->getSign());
+        vector<cell_t> possibleMovesForOneDisk = possibleLocation(now_->getSign(), locations[i], later_->getSign());
         //add for the general list of the player
         for (int move = 0; move < possibleMovesForOneDisk.size(); move++) {
-            movesForPlayer.push_back(possibleMovesForOneDisk.at(move));
+            movesForCurrentPlayer.push_back(possibleMovesForOneDisk.at(move));
         }
     }
-    //sorts the list and checks there are no duplicates
-    sort(movesForPlayer.begin(), movesForPlayer.end());
-    movesForPlayer.erase(unique(movesForPlayer.begin(), movesForPlayer.end()), movesForPlayer.end());
-    return movesForPlayer;
 }
 
-vector<string> ReversiRules::getAllLocations(char sign) {
-    vector<string> locations;
+vector<point_t> ReversiRules::getAllLocations(char sign) {
+    vector<point_t> locations;
     //for each row and col in the board
     for (int i = 0; i < board_->getWidth(); i++) {
         for (int j = 0; j < board_->getHeight(); j++) {
             //if its the same sign as we're looking for, add to the vector
-            if (board_->whichDiskSign(i, j) == sign) {
-                stringstream ss;
+            if (board_->getSign(i,j) == sign) {
+                struct point_t p;
+                p.x = i;
+                p.y = j;
+                locations.push_back(p);
+                /*stringstream ss;
                 ss << "(" << i << "," << j << ")";
-                locations.push_back(ss.str());
+                locations.push_back(ss.str());*/
             }
         }
     }
@@ -64,9 +67,11 @@ vector<string> ReversiRules::getAllLocations(char sign) {
 }
 
 
-vector<string> ReversiRules::possibleLocation(char current,
-                                              int i, int j, char another) {
-    vector<string> possibleMoves;
+vector<cell_t> ReversiRules::possibleLocation(char current,
+                                              point_t point, char another) { //wanted: returning cell holding vector of possible fliping
+   // vector<string> possibleMoves;
+    vector<cell_t> possibleMoves;
+    vector<point_t> flippingPoints;
 
     //first checking the upper row left to right,
     // mid row left and right, lower row left to right
@@ -77,22 +82,35 @@ vector<string> ReversiRules::possibleLocation(char current,
             int horBackUp = horizontal;
             //if the disk next to me is in another color
             // keep going that direction until its not in another color
-            while (board_->isInBorders(i + vertical, j + horizontal) &&
-                   (board_->whichDiskSign(i + vertical,
-                                         j + horizontal) == another)) {
+            while (board_->isInBorders(point.x + vertical, point.y + horizontal) &&
+                   (board_->getSign(point.x + vertical,
+                                          point.y + horizontal) == another)) {
+                //add this location as a flipping point for input point
+                struct point_t flip;
+                flip.x = point.x + vertical;
+                flip.y = point.y + horizontal;
+                flippingPoints.push_back(flip);
+
                 vertical = vertical + verBackUp;
                 horizontal = horizontal + horBackUp;
+
             }
             //if its empty and i moved more than one step -
             // its an optional move for the player
-            if (board_->isInBorders(i + vertical, j + horizontal)) {
-                if ((board_->whichDiskSign(i + vertical,
-                                          j + horizontal) == ' ') &&
+            if (board_->isInBorders(point.x+ vertical, point.y + horizontal)) {
+                if ((board_->getSign(point.x + vertical,
+                                           point.y + horizontal) == ' ') &&
                         ((horBackUp != horizontal) ||
                                 (verBackUp != vertical))) {
-                    stringstream ss;
-                    ss << "(" << i + vertical << "," << j + horizontal << ")";
-                    possibleMoves.push_back(ss.str());
+                    struct cell_t possibleMove;
+                    possibleMove.x = point.x +vertical;
+                    possibleMove.y = point.y + horizontal;
+                    possibleMove.flip = flippingPoints;
+                    flippingPoints.clear();
+                  /*  stringstream ss;
+                    ss << "(" << point.x + vertical << "," << point.y + horizontal << ")";
+                    possibleMoves.push_back(ss.str());*/
+                    possibleMoves.push_back(possibleMove);
                 }
             }
             //use the back ups to set them back to original,
@@ -109,9 +127,10 @@ void ReversiRules::nextTurn() {
     stringstream print;
     //prints the updated board
     this->board_->print(this->screen_);
+    this->screen_->printScore(blackP_,whiteP_);
     //if the current player has no optional moves
     // he presses any key and the turn goes for the other player
-    if (getMovesForPlayer().size() == 0) {
+    if (this->movesForCurrentPlayer.size() == 0) {
         print<< "no moves for player " << now_->getSign()
              <<" please press any key to pass your turn: ";
         this->screen_->show(print.str());
@@ -148,28 +167,34 @@ void ReversiRules::nextTurn() {
     setPlayerDisk(row, col);
     //flip any disks standing in the way according to rules
     flipFrom(row, col);
-
+    this->movesForCurrentPlayer.clear();
     //switch between players
     GeneralPlayer* temp = now_;
     now_ = later_;
     later_ = temp;
+    getMovesForPlayer();
 }
 
 void ReversiRules::printMovesForPlayer() {
     stringstream toShow;
     //gets the optional moves
-    vector<string> moves = getMovesForPlayer();
+
+    vector<string> movesToPrint;
     toShow << "player " << now_->getSign() << " it's your turn " <<endl;
     toShow << "your optional choices are: ";
     this->screen_->show(toShow.str());
-    //print any choice from the choices vector
-    for (int i = 0; i < moves.size(); i++) {
 
-        char row =  moves.at(i).at(1) + 1;
-        char col = moves.at(i).at(3) + 1;
-        stringstream ss;
-        ss << "(" << row << "," << col << ")";
-        this->screen_->show(ss.str());
+    for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+        stringstream location;
+        location << "(" << movesForCurrentPlayer[i].x + 1 << "," << movesForCurrentPlayer[i].y + 1 << ")";
+
+         movesToPrint.push_back(location.str());
+    }
+    sort(movesToPrint.begin(), movesToPrint.end());
+    movesToPrint.erase(unique(movesToPrint.begin(), movesToPrint.end()), movesToPrint.end());
+    //print any choice from the choices vector
+    for (int i = 0; i < movesToPrint.size(); i++) {
+        this->screen_->show(movesToPrint[i]);
     }
 }
 
@@ -179,10 +204,10 @@ bool ReversiRules::gameover() {
     if (board_->fullBoard()) {
         return true;
     }
-    if ((getMovesForPlayer().size() == 0)) {
+    if ((movesForCurrentPlayer.size() == 0)) {
         now_ = later_;
         later_ = temp;
-        if (getMovesForPlayer().size() == 0) {
+        if (movesForCurrentPlayer.size() == 0) {
             return true;
         }
         temp = later_;
@@ -193,7 +218,9 @@ bool ReversiRules::gameover() {
 }
 
 bool ReversiRules::isThatAnOption(string choice) {
-    vector<string> option = getMovesForPlayer();
+
+
+
     //suppose to be of the pattern  "row,col", at least 3 chars
     if (choice.length() < 3) {
         return false;
@@ -204,9 +231,9 @@ bool ReversiRules::isThatAnOption(string choice) {
     int row = choice.at(0) -'0' - 1;
     int col = choice.at(2) - '0' - 1;
     //if the choice is part of the vector of choices return true
-    for (int i = 0; i < option.size(); i++) {
-        int optionRow = option.at(i).at(1) - '0';
-        int optionCol = option.at(i).at(3) - '0';
+    for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+        int optionRow = movesForCurrentPlayer.at(i).x;
+        int optionCol = movesForCurrentPlayer.at(i).y;
         if ((row == optionRow) && (col == optionCol)) {
             return true;
         }
@@ -217,69 +244,31 @@ bool ReversiRules::isThatAnOption(string choice) {
 void ReversiRules::setPlayerDisk(int row, int col) {
     //if we set it on the other player existing disk, we need to
     //reduce the other player score in 1
-    if (board_->getDisk(row,col).getSign() == later_->getSign()) {
+    if (board_->getSign(row,col)== later_->getSign()) {
         later_->ScoreDown(1);
     }
     //if the desired place wasnt of the current player - add 1 to his score
-    if (board_->getDisk(row, col).getSign() != now_->getSign()) {
+    if (board_->getSign(row, col) != now_->getSign()) {
         now_->ScoreUp(1);
     }
     //set the board to have this player disk in the desired position
-    board_->SetDisk(row, col, now_->getSign());
+    board_->setSign(row, col, now_->getSign());
 }
 
 
 void ReversiRules::flipFrom(int row, int col) {
-    //scaning the area of the new disk, going from the upper row to the lower
-    //scanning each row from left to right
-    for (int vertical = -1; vertical < 2; vertical++) {
-        for (int horizontal = -1; horizontal < 2; horizontal++) {
-            //keeping the intial values
-            int verBackUp = vertical;
-            int horBackUp = horizontal;
-            //counting how many disk in a row to flip and change.
-            int count = 0;
-            //keep going in that direction only if its part of board borders
-            if (board_->isInBorders(row + vertical, col + horizontal)) {
-                //if the disk next to me is in another color
-                // keep going that direction until its not in another color
-                while (board_->whichDiskSign
-                        (row + vertical, col + horizontal)
-                       == later_->getSign()) {
-                    vertical = vertical + verBackUp;
-                    horizontal = horizontal + horBackUp;
-                    //add to the flipping counter
-                    count++;
-                    //check if the next cell in that
-                    // direction is part of the board
-                    if (!board_->isInBorders(row + vertical,
-                                            col + horizontal)) {
-                        break;
-                    }
-                }
-                //if its stops and were stiil in the boad border it means this
-                //cell is not in the other color anymore
-                if (board_->isInBorders(row + vertical, col + horizontal)) {
-                    //it its not empty and
-                    // in this player sign- goes back
-                    // "count" steps and flip all of other player disks
-                    if (board_->whichDiskSign
-                            (row +vertical,col +
-                                    horizontal)==now_->getSign()) {
-                        //goes back the steps
-                        for (int c = 0; c < count; c++) {
-                            vertical = vertical - verBackUp;
-                            horizontal = horizontal - horBackUp;
-                            setPlayerDisk(row + vertical, col + horizontal);
-                        }
-                    }
-                }
-                vertical = verBackUp;
-                horizontal = horBackUp;
+
+    for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+        if ((movesForCurrentPlayer[i].x == row) && (movesForCurrentPlayer[i].y == col)) {
+            for (int j = 0; j < movesForCurrentPlayer[i].flip.size(); j++) {
+                setPlayerDisk(movesForCurrentPlayer[i].flip[j].x, movesForCurrentPlayer[i].flip[j].y);
+
             }
 
         }
+        movesForCurrentPlayer[i].flip.clear();
     }
+
 }
 
 
