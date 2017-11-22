@@ -93,10 +93,6 @@ int Board::getHeight() {
 }
 
 
-/*char Board::whichDiskSign(int row, int col) {
-    return getDisk(row,col).getSign();*
-}*/
-
 char Board::getSign(int row, int col) {
     return matrix_[row][col];
 }
@@ -127,11 +123,6 @@ bool Board::fullBoard() {
     return true;
 }
 
-//Constructor.
-/*Board::Board(int size, char player1, char player2): size(size), p1(player1), p2(player2){
-    //Set the positions of the the players.
-    this->setStartPositions();
-}*/
 
 //printBoard.
 //Prints the board details - numbers of rows and columns.
@@ -167,31 +158,6 @@ void Board::printBoard() {
     }//End of first for.
 }
 
-//setStartPositions.
-//"Fill" the matrix with the start positions.
-/*void Board::setStartPositions() {
-    int i, j;
-    this->matrix = new char*[size + 1];
-    for (i = 0; i < size + 1; i++) {
-        this->matrix[i] = new char[size];
-    }
-    //For the rows.
-    for (i = 0; i < size + 1; i++) {
-        //For the columns.
-        for (j = 0; j < size + 1; j++) {
-            //Set the (4,4) & (5,5) with the 'O'player.
-            if (((i == size / 2 - 1) && (j == size / 2)) || ((i == size / 2) && (j == size / 2 + 1))) {
-                matrix[i][j] = this->p2;
-            }//Set the (4,5) & (5,4) with the 'X'player.
-            else if (((i == size / 2 - 1) && (j == size / 2 + 1)) || ((i == size / 2) && (j == size / 2))) {
-                matrix[i][j] = this->p1;
-            }//Set the rest with ' '.
-            else {
-                matrix[i][j] = ' ';
-            }
-        }
-    }
-}*/
 
 //printPositions.
 //Get i, j variable and prints the matrix[i][j] value.

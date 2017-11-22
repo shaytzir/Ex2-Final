@@ -30,15 +30,13 @@ void ReversiRules::getMovesForPlayer() {
     //knowing for which player were looking for moves
     char sign = now_->getSign();
     //finding out all locations of the current player on the board
-    vector<point_t> locations = getAllLocations(sign);
+    vector<point_t> locations = getLocationsOfPlayerOnBoard(sign);
 
-   // vector<cell_t> movesForPlayer;
     //for each location of the current player -
     for (int i = 0; i < locations.size(); i++) {
-      /*  int row = locations.at(i).x; //at 1 place "(i,j)"
-        int col = locations.at(i).y;//at 3 place "(i,j)"*/
         //look for optional moves
-        vector<cell_t> possibleMovesForOneDisk = possibleLocation(now_->getSign(), locations[i], later_->getSign());
+        vector<cell_t> possibleMovesForOneDisk = possibleMovesForOneDisk(now_->getSign(), locations[i],
+                                                                         later_->getSign());
         //add for the general list of the player
         for (int move = 0; move < possibleMovesForOneDisk.size(); move++) {
             movesForCurrentPlayer.push_back(possibleMovesForOneDisk.at(move));
@@ -46,7 +44,7 @@ void ReversiRules::getMovesForPlayer() {
     }
 }
 
-vector<point_t> ReversiRules::getAllLocations(char sign) {
+vector<point_t> ReversiRules::getLocationsOfPlayerOnBoard(char sign) {
     vector<point_t> locations;
     //for each row and col in the board
     for (int i = 0; i < board_->getWidth(); i++) {
@@ -57,9 +55,6 @@ vector<point_t> ReversiRules::getAllLocations(char sign) {
                 p.x = i;
                 p.y = j;
                 locations.push_back(p);
-                /*stringstream ss;
-                ss << "(" << i << "," << j << ")";
-                locations.push_back(ss.str());*/
             }
         }
     }
@@ -67,9 +62,8 @@ vector<point_t> ReversiRules::getAllLocations(char sign) {
 }
 
 
-vector<cell_t> ReversiRules::possibleLocation(char current,
-                                              point_t point, char another) { //wanted: returning cell holding vector of possible fliping
-   // vector<string> possibleMoves;
+vector<cell_t> ReversiRules::possibleMovesForOneDisk(char current,
+                                                     point_t point, char another) { //wanted: returning cell holding vector of possible fliping
     vector<cell_t> possibleMoves;
     vector<point_t> flippingPoints;
 
@@ -107,9 +101,6 @@ vector<cell_t> ReversiRules::possibleLocation(char current,
                     possibleMove.y = point.y + horizontal;
                     possibleMove.flip = flippingPoints;
                     flippingPoints.clear();
-                  /*  stringstream ss;
-                    ss << "(" << point.x + vertical << "," << point.y + horizontal << ")";
-                    possibleMoves.push_back(ss.str());*/
                     possibleMoves.push_back(possibleMove);
                 }
             }
@@ -218,8 +209,6 @@ bool ReversiRules::gameover() {
 }
 
 bool ReversiRules::isThatAnOption(string choice) {
-
-
 
     //suppose to be of the pattern  "row,col", at least 3 chars
     if (choice.length() < 3) {
