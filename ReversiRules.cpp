@@ -35,11 +35,11 @@ void ReversiRules::getMovesForPlayer() {
     //for each location of the current player -
     for (int i = 0; i < locations.size(); i++) {
         //look for optional moves
-        vector<cell_t> possibleMovesForOneDisk = possibleMovesForOneDisk(now_->getSign(), locations[i],
+        vector<cell_t> possibleMoves = possibleMovesForOneDisk(now_->getSign(), locations[i],
                                                                          later_->getSign());
         //add for the general list of the player
-        for (int move = 0; move < possibleMovesForOneDisk.size(); move++) {
-            movesForCurrentPlayer.push_back(possibleMovesForOneDisk.at(move));
+        for (int move = 0; move < possibleMoves.size(); move++) {
+            movesForCurrentPlayer.push_back(possibleMoves.at(move));
         }
     }
 }
