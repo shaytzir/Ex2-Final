@@ -35,7 +35,7 @@ Board::Board(int wid, int len) {
     matrix_[midRow + 1 - 1][midCol - 1] = 'X';
 }
 
-void Board::print(Visualization* screen) {
+string Board::printBoard() {
     //creating the upper border of the table
     stringstream boardToShow;
     boardToShow << endl;
@@ -70,7 +70,7 @@ void Board::print(Visualization* screen) {
         boardToShow << horizontalSep_;
     }
     boardToShow << endl;
-    screen->show(boardToShow.str());
+    return boardToShow.str();
 }
 
 
@@ -121,41 +121,6 @@ bool Board::fullBoard() {
         }
     }
     return true;
-}
-
-
-//printBoard.
-//Prints the board details - numbers of rows and columns.
-void Board::printBoard() {
-    int i, j, t;
-    cout << "Current board:\n" << endl;
-    //For the rows.
-    for (j = 0; j < size + 1; j++) {
-        if (j == 0) {
-            cout << "  ";
-        } else { //Print the numbers.
-            cout << " " << j;
-        }
-        //For the columns.
-        for (i = 0; i < size + 1; i++) {
-            if (j == 0 || i == 0) {
-                cout << " | ";
-            }
-            //Print the numbers.
-            if (j == 0 && i != size) {
-                cout << i + 1;
-            }
-            if (j != 0 && i != size) {
-                this->printPositions(i, j);
-                cout << " | ";
-            }
-        }//End of second for.
-        cout << "" << endl;
-        for (t = 0; t < (size + 1) * 4; t++) {
-            cout << ".";
-        }
-        cout << '\n';
-    }//End of first for.
 }
 
 

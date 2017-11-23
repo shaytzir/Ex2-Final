@@ -6,8 +6,8 @@
 #ifndef EX2_BOARD_H
 #define EX2_BOARD_H
 
-
-#include "Visualization.h"
+#include <string>
+using namespace std;
 
 class Board {
 public:
@@ -22,16 +22,20 @@ public:
      * a destructor.
      */
     ~Board();
+
+
     /**
      * this function print the table of the game with the players set.
      */
-    void print(Visualization* screen);
+    /*void print(Visualization* screen);
     /**
      *
      * @param row row of cell to check
      * @param col  col of cell to check
      * @return sign of the cell row,col
      */
+
+
    // char whichDiskSign(int row, int col);
     /**
      *
@@ -71,7 +75,7 @@ public:
     int getHeight();
 
     Board(int size, char player1, char player2);
-    void printBoard();
+    string printBoard();
     void printPositions(int i, int j);
   //  void setStartPositions();
     void freeMatrix();

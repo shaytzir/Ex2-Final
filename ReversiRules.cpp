@@ -117,7 +117,7 @@ vector<cell_t> ReversiRules::possibleMovesForOneDisk(char current,
 void ReversiRules::nextTurn() {
     stringstream print;
     //prints the updated board
-    this->board_->print(this->screen_);
+    this->screen_->printOut(this->board_);
     this->screen_->printScore(blackP_,whiteP_);
     //if the current player has no optional moves
     // he presses any key and the turn goes for the other player
@@ -262,18 +262,22 @@ void ReversiRules::flipFrom(int row, int col) {
 
 
 void ReversiRules::whoWon() {
-    stringstream print;
+    //stringstream print;
     int scoreBlackP = blackP_->getScore();
     int scoreWhiteP = whiteP_->getScore();
-    this->board_->print(this->screen_);
+    char winner;
+    this->screen_->printOut(this->board_);
     if (scoreBlackP > scoreWhiteP) {
-        print << " player " <<blackP_->getSign() << " won." << endl;
+        winner = blackP_->getSign();
+        //print << " player " <<blackP_->getSign() << " won." << endl;
     } else if (scoreWhiteP > scoreBlackP) {
-        print << "player " << whiteP_->getSign() << " won." << endl;
+        winner = whiteP_->getSign();
+        //print << "player " << whiteP_->getSign() << " won." << endl;
     } else {
-        print << "it's a tie." << endl;
+        winner = 'T';
+        //print << "it's a tie." << endl;
     }
-    print << blackP_->getSign() << ": " << scoreBlackP
-          << "  " << whiteP_->getSign() << ": " << scoreWhiteP << endl;
-    this->screen_->show(print.str());
+    //print << blackP_->getSign() << ": " << scoreBlackP
+          //<< "  " << whiteP_->getSign() << ": " << scoreWhiteP << endl;
+    this->screen_->printWinner(winner);
 }

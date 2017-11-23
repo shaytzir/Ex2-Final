@@ -8,7 +8,7 @@
 #include "Visualization.h"
 #include "GameFlow.h"
 #include "Console.h"
-
+#include "Board.h"
 int main() {
     //creates two players
     GeneralPlayer* black = new HumanP('X');

@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Point.h"
+
 using namespace std;
 
 //Cell_t.
