@@ -122,9 +122,11 @@ void ReversiRules::nextTurn() {
     //if the current player has no optional moves
     // he presses any key and the turn goes for the other player
     if (this->movesForCurrentPlayer.size() == 0) {
-        print<< "no moves for player " << now_->getSign()
+        this->screen_->printNoMoreMoves(now_->getSign());
+        /*print<< "no moves for player " << now_->getSign()
              <<" please press any key to pass your turn: ";
         this->screen_->show(print.str());
+         */
         string key;
         cin >> key;
         //switching between players
@@ -134,20 +136,22 @@ void ReversiRules::nextTurn() {
         return;
         //if he has moves, let him choose one of them
     } else {
-        printMovesForPlayer();
-        print << endl << "please choose a cell row,col: ";
-        this->screen_->show(print.str());
-
+        this->screen_->printOptions(now_->getSign(), this->movesForCurrentPlayer);
+        //printMovesForPlayer();
+        //print << endl << "please choose a cell row,col: ";
+        //this->screen_->show(print.str());
     }
     string choice;
     cin >> choice;
     //if he didnt type a valid choice, make him choose again
     while (!isThatAnOption(choice)) {
-        print.str("");
+        /*print.str("");
         print << "you didn't type one of the "
                 "option/ you didn't type as pattern 'row,col'"<< endl;
         print << "enter again: 'row,col': ";
         this->screen_->show(print.str());
+         */
+        this->screen_->printError();
         cin >> choice;
     }
     //keeps his choice to be sync with matrix
@@ -166,7 +170,7 @@ void ReversiRules::nextTurn() {
     getMovesForPlayer();
 }
 
-void ReversiRules::printMovesForPlayer() {
+/*void ReversiRules::printMovesForPlayer() {
     stringstream toShow;
     //gets the optional moves
 
@@ -187,7 +191,7 @@ void ReversiRules::printMovesForPlayer() {
     for (int i = 0; i < movesToPrint.size(); i++) {
         this->screen_->show(movesToPrint[i]);
     }
-}
+}*/
 
 
 bool ReversiRules::gameover() {

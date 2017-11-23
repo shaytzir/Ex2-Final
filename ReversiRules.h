@@ -62,7 +62,7 @@ public:
     /**
      * print the moves the player can choose from
      */
-    void printMovesForPlayer();
+    //void printMovesForPlayer();
     /**
      * finds possible moves for current player turn
      * @return a vector containing strings of optional moves

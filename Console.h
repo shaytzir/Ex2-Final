@@ -21,7 +21,7 @@ public:
     virtual void printOut(Board* b) const;
     virtual void printError() const;
     virtual void printNoMoreMoves(char player) const;
-    virtual void printOptions(char player, vector <cell_t> moves, char winner) const;
+    virtual void printOptions(char player, vector <cell_t> moves) const;
     virtual void printScore(GeneralPlayer* player1, GeneralPlayer* player2) const;
     virtual void printWinner(char winner) const;
 

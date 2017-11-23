@@ -39,13 +39,7 @@ void Console::printNoMoreMoves(char player) const {
 
 //printOptions.
 //Print out all the player possible moves.
-void Console::printOptions(char player, vector <cell_t> moves, char winner) const {
-    //If there are no more moves to the players, print
-    // "Game over" and the name of the winner and finish the game.
-    if (moves.size() == 0) {
-        cout << "Game over. No more moves." << '\n' << winner << " is the winner!!!";
-        return;
-    }
+void Console::printOptions(char player, vector <cell_t> moves) const {
     cout << player << ": It's your move." << '\n' << "Your possible moves: " << flush;
     this->options(moves);
     cout << '\n' << "Please enter your move row,col: ";
@@ -67,7 +61,7 @@ void Console::options(vector <cell_t> moves) const {
     }
     //For all the non-duplicate options - print them out.
     for (int i = 0; i < print.size(); i++) {
-        cout << "(" << print.at(i)->y << "," << print.at(i)->x + 1 << ")";
+        cout << "(" << print.at(i)->y + 1 << "," << print.at(i)->x + 1 << ")";
     }
 }
 
@@ -86,6 +80,7 @@ bool Console::isAlreadyIn(vector <cell_t*> print, cell_t c) const {
 //printWinner.
 //Print out the winner of this game.
 void Console::printWinner(char winner) const {
+    cout << "Game over!" << endl;
     if (winner == 'T') {
         cout << "It's a tie!" << endl;
         return;

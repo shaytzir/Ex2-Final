@@ -8,14 +8,15 @@
 
 
 void GameFlow::run() {
-    stringstream toShow;
+    //stringstream toShow;
     //as long as the game isnt over, keep switching turns
     do {
         currentGame_->nextTurn();
     } while (!currentGame_->gameover());
     //when the game is over show who won
-    toShow<< "game is over" << endl;
-    this->screen_->show(toShow.str());
+    //toShow<< "game is over" << endl;
+    //this->screen_->show(toShow.str());
+
     currentGame_->whoWon();
 }
 
