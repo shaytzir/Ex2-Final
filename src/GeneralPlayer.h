@@ -6,6 +6,12 @@
 #ifndef EX2_GENERALPLAYER_H
 #define EX2_GENERALPLAYER_H
 
+#include <string>
+#include "Board.h"
+#include "Cell.h"
+
+using namespace std;
+
 class GeneralPlayer {
 public:
     /**
@@ -28,6 +34,9 @@ public:
      * @return the score of this player
      */
     virtual int getScore() const = 0;
+
+    virtual string getNextMove(Board* b) = 0;
+    virtual vector<cell_t> getMovesForPlayer(Board* gameBoard, char sign) const = 0;
 protected:
     char sign_;
     int disksNum_;

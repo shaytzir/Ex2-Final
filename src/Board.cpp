@@ -35,6 +35,25 @@ Board::Board(int wid, int len) {
     matrix_[midRow + 1 - 1][midCol - 1] = 'X';
 }
 
+Board::Board(Board *b) {
+    width_ = b->width_;
+    length_ = b->length_;
+    verticalSep_ = b->verticalSep_; //vertical seperator
+    horizontalSep_ = b->horizontalSep_; //horizontal
+    //creating a dynamic array
+    matrix_ = new char*[width_];
+    //which holds arrays
+    for (int i = 0; i < width_; i++) {
+        matrix_[i] = new char[length_];
+    }
+    for (int i = 0; i < width_; i++) {
+        for (int j = 0; j < length_; j++) {
+            matrix_[i][j] = b->matrix_[i][j];
+        }
+    }
+    size = b->size;
+}
+
 string Board::printBoard() {
     //creating the upper border of the table
     stringstream boardToShow;
@@ -140,7 +159,7 @@ void Board::freeMatrix() {
 }
 
 //getMatrix.
-char** Board::getMatrix() {
+char** Board::getMatrix() const{
     return this->matrix_;
 }
 

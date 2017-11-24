@@ -27,9 +27,6 @@ public:
     virtual void printNoMoreMoves(char player) const = 0;
     virtual void printOptions(char player, std::vector <cell_t> moves) const = 0;
     virtual void printWinner(char winner) const = 0;
-private:
-    //Board* gameBoard;
-
 };
 
 

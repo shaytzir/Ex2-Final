@@ -75,24 +75,22 @@ public:
     int getHeight();
 
     Board(int size, char player1, char player2);
+    Board(Board *b);
     string printBoard();
     void printPositions(int i, int j);
   //  void setStartPositions();
     void freeMatrix();
-    char** getMatrix();
+    char** getMatrix() const;
     int getSize();
+
 
 private:
     int width_;
     int length_;
     char verticalSep_; //vertical seperator
     char horizontalSep_; //horizontal
-   // Disk** matrix_;
-
     char **matrix_;
     int size;
-    char p1;
-    char p2;
 };
 
 

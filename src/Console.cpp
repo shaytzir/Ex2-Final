@@ -61,7 +61,7 @@ void Console::options(vector <cell_t> moves) const {
     }
     //For all the non-duplicate options - print them out.
     for (int i = 0; i < print.size(); i++) {
-        cout << "(" << print.at(i)->y + 1 << "," << print.at(i)->x + 1 << ")";
+        cout << "(" << print.at(i)->x + 1 << "," << print.at(i)->y + 1 << ")";
     }
 }
 
