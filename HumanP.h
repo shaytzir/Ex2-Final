@@ -36,6 +36,11 @@ public:
      * @return the score of this player
      */
     int getScore() const;
+    string getNextMove(Board* b) {};
+    vector<cell_t> getMovesForPlayer(Board* gameBoard, char sign) const ;
+private:
+    vector<point_t> getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const ;
+    vector<cell_t> possibleMovesForOneDisk(char current, point_t point, Board* gameBoard) const ;
 };
 
 

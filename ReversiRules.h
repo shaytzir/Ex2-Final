@@ -67,13 +67,13 @@ public:
      * finds possible moves for current player turn
      * @return a vector containing strings of optional moves
      */
-    void getMovesForPlayer();
+    //void getMovesForPlayer();
     /**
      *
      * @param sign char sign of a specific player
      * @return all locations of that sign in the board
      */
-    vector<point_t> getLocationsOfPlayerOnBoard(char sign);
+    //vector<point_t> getLocationsOfPlayerOnBoard(char sign);
     /**
      * return possible moves of a specific disk
      * @param current sign of the current player
@@ -82,7 +82,7 @@ public:
      * @param another the sign of the other player
      * @return vector of possible moves for a specific disk
      */
-    vector<cell_t> possibleMovesForOneDisk(char current, point_t point, char another);
+    //vector<cell_t> possibleMovesForOneDisk(char current, point_t point, char another);
     /**
      * comparing scores and declaring
      * who won after showing the last board

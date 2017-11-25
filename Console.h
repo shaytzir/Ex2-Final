@@ -24,7 +24,6 @@ public:
     virtual void printOptions(char player, vector <cell_t> moves) const;
     virtual void printScore(GeneralPlayer* player1, GeneralPlayer* player2) const;
     virtual void printWinner(char winner) const;
-
 private:
     void options(vector <cell_t> moves) const;
     bool isAlreadyIn(vector <cell_t*> print, cell_t c) const;
