@@ -3,6 +3,7 @@
 // ID: 315314930
 //
 
+#include <iostream>
 #include "HumanP.h"
 
 HumanP::HumanP(char playerSign) {
@@ -61,7 +62,6 @@ vector<point_t> HumanP::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard)
 vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Board* gameBoard) const {
     vector<cell_t> possibleMoves;
     vector<point_t> flippingPoints;
-
     //first checking the upper row left to right,
     // mid row left and right, lower row left to right
     for (int vertical = -1; vertical < 2; vertical++) {
@@ -73,13 +73,12 @@ vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Boar
             // keep going that direction until its not in another color
             while (gameBoard->isInBorders(point.x + vertical, point.y + horizontal) &&
                    (gameBoard->getSign(point.x + vertical, point.y + horizontal) != current) &&
-                    (gameBoard->getSign(point.x + vertical, point.y + horizontal) != ' ')) {
+                   (gameBoard->getSign(point.x + vertical, point.y + horizontal) != ' ')) {
                 //add this location as a flipping point for input point
                 struct point_t flip;
                 flip.x = point.x + vertical;
                 flip.y = point.y + horizontal;
                 flippingPoints.push_back(flip);
-
                 vertical = vertical + verBackUp;
                 horizontal = horizontal + horBackUp;
 
@@ -106,4 +105,9 @@ vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Boar
         }
     }
     return possibleMoves;
+}
+string HumanP::getNextMove(Board* b) {
+    string choice;
+    cin >> choice;
+    return choice;
 }

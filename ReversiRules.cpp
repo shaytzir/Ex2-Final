@@ -28,14 +28,13 @@ ReversiRules::~ReversiRules() {
 
 void ReversiRules::nextTurn() {
     int row = 0, col = 0;
-    string choice;
+    string choice, key;
     this->screen_->printOut(this->board_);
     this->screen_->printScore(blackP_,whiteP_);
     //if the current player has no optional moves
     // he presses any key and the turn goes for the other player
     if (this->movesForCurrentPlayer.size() == 0) {
         this->screen_->printNoMoreMoves(now_->getSign());
-        string key;
         cin >> key;
         //switching between players
         GeneralPlayer* temp = now_;
@@ -44,18 +43,13 @@ void ReversiRules::nextTurn() {
         return;
         //if he has moves, let him choose one of them
     } else {
-        if (this->now_->getSign() == 'O') {//If the player is AI.
-            choice = this->now_->getNextMove(this->board_);
-        } else { //If the player is human.
-            this->screen_->printOptions(now_->getSign(), this->movesForCurrentPlayer);
+        this->screen_->printOptions(now_->getSign(), this->movesForCurrentPlayer);
+
+        choice = this->now_->getNextMove(this->board_);
+        //if he didnt type a valid choice, make him choose again
+        while (!isThatAnOption(choice)) {
+            this->screen_->printError();
             cin >> choice;
-            //if he didnt type a valid choice, make him choose again
-            while (!isThatAnOption(choice)) {
-                this->screen_->printError();
-                cin >> choice;
-            }
-            //keeps his choice to be sync with matrix
-            //(0 to width_-1)(0 to length_-1)
         }
     }
     row = choice.at(0) -'0' - 1;
@@ -128,7 +122,6 @@ void ReversiRules::setPlayerDisk(int row, int col) {
 
 
 void ReversiRules::flipFrom(int row, int col) {
-
     for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
         if ((movesForCurrentPlayer[i].x == row) && (movesForCurrentPlayer[i].y == col)) {
             for (int j = 0; j < movesForCurrentPlayer[i].flip.size(); j++) {

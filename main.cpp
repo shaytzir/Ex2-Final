@@ -11,11 +11,20 @@
 #include "Console.h"
 #include "Board.h"
 int main() {
-    //creates two players
-    GeneralPlayer* black = new HumanP('X');
-    GeneralPlayer* white = new AIPlayer('O');
+    GeneralPlayer *black, *white;
     //creates specific visualization for the current game
     Visualization* screen = new Console();
+    int choice;
+    screen->openScreen();
+    cin >> choice;
+    //creates two players
+    if (choice == 1) {
+        black = new HumanP('X');
+        white = new HumanP('O');
+    } else if (choice == 2) {
+        black = new HumanP('X');
+        white = new AIPlayer('O');
+    }
     //creates new game
     GameFlow game(black, white, screen);
     //runs the game
