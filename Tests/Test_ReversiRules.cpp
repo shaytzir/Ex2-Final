@@ -23,3 +23,7 @@ namespace {
 TEST_F(Test_ReversiRules, isGameOver) {
     EXPECT_FALSE(rules.gameover());
 }
+
+/*TEST_F(Test_ReversiRules, ll)  {
+    EXPECT_FALSE(rules.isThatAnOption())
+}*/
