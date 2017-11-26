@@ -125,10 +125,10 @@ vector<cell_t> AIPlayer::possibleMovesForOneDisk(char current, point_t point, Bo
                     possibleMove.x = point.x +vertical;
                     possibleMove.y = point.y + horizontal;
                     possibleMove.flip = flippingPoints;
-                    flippingPoints.clear();
                     possibleMoves.push_back(possibleMove);
                 }
             }
+            flippingPoints.clear();
             //use the back ups to set them back to original,
             //so the changes wont harm the loop
             vertical = verBackUp;

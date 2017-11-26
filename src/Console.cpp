@@ -87,3 +87,6 @@ void Console::printWinner(char winner) const {
     }
     cout << winner << " is the winner!!!" << endl;
 }
+void Console::openScreen() {
+    cout << "Please enter your option:\n(1) Tow human players.\n(2) Play against the computer." << endl;
+}
