@@ -9,7 +9,7 @@
 
 #include "GeneralPlayer.h"
 
-class HumanP : public GeneralPlayer {
+class HumanP : public GeneralPlayer {//
 public:
     /**
      * constructor
