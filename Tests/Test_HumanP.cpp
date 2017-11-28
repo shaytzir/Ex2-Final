@@ -11,10 +11,11 @@
 namespace {
     class Test_HumanP : public testing::Test {
     public:
-        HumanP player = HumanP('T');
-        Test_HumanP() {
-            player;
-        }
+        Test_HumanP():player('T'){};
+
+    protected:
+        HumanP player;
+
     };
 }
 
