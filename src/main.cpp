@@ -1,6 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #include "GeneralPlayer.h"
@@ -9,7 +11,7 @@
 #include "Visualization.h"
 #include "GameFlow.h"
 #include "Console.h"
-#include "Board.h"
+
 int main() {
     GeneralPlayer *black, *white;
     //creates specific visualization for the current game

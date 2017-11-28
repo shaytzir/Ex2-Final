@@ -1,11 +1,12 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_GAMEFLOW_H
 #define EX2_GAMEFLOW_H
-
 
 #include "ReversiRules.h"
 #include "Visualization.h"
@@ -31,8 +32,6 @@ public:
 private:
     ReversiRules* currentGame_;
     Visualization* screen_;
-
 };
-
 
 #endif //EX2_GAMEFLOW_H

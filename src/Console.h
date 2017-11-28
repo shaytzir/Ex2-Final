@@ -1,23 +1,18 @@
 //
-// Created by shay on 11/9/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_CONSOLE_H
 #define EX2_CONSOLE_H
-
 
 #include "Visualization.h"
 #include "Board.h"
 
 class Console : public Visualization {
 public:
-    /**
-     *
-     * @param toShow the function gets a string and prints it into concole.
-     */
-    //virtual void show(string toShow) const;
-
-    //Console(Board* b);
     virtual void printOut(Board* b) const;
     virtual void printError() const;
     virtual void printNoMoreMoves(char player) const;
@@ -28,8 +23,6 @@ public:
 private:
     void options(vector <cell_t> moves) const;
     bool isAlreadyIn(vector <cell_t*> print, cell_t c) const;
-    //Board* gameBoard;
 };
-
 
 #endif //EX2_CONSOLE_H

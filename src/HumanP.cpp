@@ -1,6 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #include <iostream>
@@ -26,6 +28,7 @@ int HumanP::getScore() const {
 void HumanP::ScoreDown(int num) {
     disksNum_ = disksNum_ - num;
 }
+
 vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
     vector<cell_t> movesForCurrentPlayer;
     //finding out all locations of the current player on the board
@@ -41,6 +44,7 @@ vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
     }
     return movesForCurrentPlayer;
 }
+
 vector<point_t> HumanP::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const {
     vector<point_t> locations;
     //for each row and col in the board
@@ -58,7 +62,6 @@ vector<point_t> HumanP::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard)
     return locations;
 }
 
-//wanted: returning cell holding vector of possible fliping
 vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Board* gameBoard) const {
     vector<cell_t> possibleMoves;
     vector<point_t> flippingPoints;
@@ -107,6 +110,7 @@ vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Boar
     }
     return possibleMoves;
 }
+
 string HumanP::getNextMove(Board* b) {
     string choice;
     cin >> choice;

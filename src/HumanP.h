@@ -1,15 +1,16 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_HUMANP_H
 #define EX2_HUMANP_H
 
-
 #include "GeneralPlayer.h"
 
-class HumanP : public GeneralPlayer {//
+class HumanP : public GeneralPlayer {
 public:
     /**
      * constructor
@@ -42,6 +43,5 @@ private:
     vector<point_t> getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const ;
     vector<cell_t> possibleMovesForOneDisk(char current, point_t point, Board* gameBoard) const ;
 };
-
 
 #endif //EX2_HUMANP_H

@@ -1,13 +1,14 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
+
 #include "Board.h"
 #include <iostream>
 #include <sstream>
-
 using namespace std;
-
 
 Board::Board(int wid, int len) {
     width_ = wid;
@@ -92,7 +93,6 @@ string Board::printBoard() {
     return boardToShow.str();
 }
 
-
 Board::~Board() {
     //frees all arrays kept in the main array
     for (int i = 0; i < width_; i++)
@@ -101,26 +101,21 @@ Board::~Board() {
     delete [] matrix_;
 }
 
-
 int Board::getWidth() {
     return this->width_;
 }
-
 
 int Board::getHeight() {
     return this->length_;
 }
 
-
 char Board::getSign(int row, int col) {
     return matrix_[row][col];
 }
 
-
 void Board::setSign(int row, int col, char sign) {
     matrix_[row][col] = sign;
 }
-
 
 bool Board::isInBorders(int row, int col) {
     if ((!(row < 0)) && (!(row > getHeight() - 1)) && (!(col < 0)) &&
@@ -129,7 +124,6 @@ bool Board::isInBorders(int row, int col) {
     }
     return false;
 }
-
 
 bool Board::fullBoard() {
     for (int i = 0; i < width_; i++) {
@@ -141,14 +135,11 @@ bool Board::fullBoard() {
     }
     return true;
 }
-
-
 //printPositions.
 //Get i, j variable and prints the matrix[i][j] value.
 void Board::printPositions(int i, int j) {
     cout << this->matrix_[i][j] << flush;
 }
-
 //freeMatrix.
 //Free the memory of the matrix.
 void Board::freeMatrix() {
@@ -157,12 +148,10 @@ void Board::freeMatrix() {
     }
     delete [] this->matrix_;
 }
-
 //getMatrix.
 char** Board::getMatrix() const{
     return this->matrix_;
 }
-
 //getSize.
 int Board::getSize() {
     return this->size;

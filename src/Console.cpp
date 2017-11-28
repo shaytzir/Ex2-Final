@@ -1,16 +1,12 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
+
 #include <cstdlib>
 #include "Console.h"
-
-//Default constructor.
-//Console::Console() {}
-
-/*void Console::show(string toShow) const {
-    cout << toShow;
-}*/
 
 void Console::printScore(GeneralPlayer *player1, GeneralPlayer *player2) const {
     cout << "----------------------" << '\n' << "    Current score:" << endl;
@@ -44,7 +40,6 @@ void Console::printOptions(char player, vector <cell_t> moves) const {
     this->options(moves);
     cout << '\n' << "Please enter your move row,col: ";
 }
-
 
 //options.
 //Print out the player possible moves.
@@ -87,6 +82,7 @@ void Console::printWinner(char winner) const {
     }
     cout << winner << " is the winner!!!" << endl;
 }
+
 void Console::openScreen() {
     cout << "Please enter your option:\n(1) Tow human players.\n(2) Play against the computer." << endl;
 }

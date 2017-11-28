@@ -1,5 +1,8 @@
 //
-// Created by Yuval on 09/11/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef REVERSI_CELL_H
@@ -7,7 +10,6 @@
 
 #include <vector>
 #include "Point.h"
-
 using namespace std;
 
 //Cell_t.
