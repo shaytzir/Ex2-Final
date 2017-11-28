@@ -11,7 +11,6 @@
 #include <sstream>
 using namespace std;
 
-<<<<<<< HEAD
 /**
  * constructor.
  * @param wid width of table.
@@ -20,11 +19,6 @@ using namespace std;
  * @param second sugn of second player.
  */
 Board::Board(int wid, int len, char first, char second) {
-=======
-
-Board::Board(int wid, int len, char first, char second) {
-
->>>>>>> a6907cbc9a113a6dd6f39f8d9572253f055fa6f9
     width_ = wid;
     length_ = len;
     verticalSep_ = '|';

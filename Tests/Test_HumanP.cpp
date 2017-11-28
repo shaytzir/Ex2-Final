@@ -30,20 +30,14 @@ TEST_F(Test_HumanP, checkScoreForPlayer) {
     EXPECT_FALSE(player.getScore() < 0);
     int width = 8;
     int length = 8;
-<<<<<<< HEAD
     Board b = Board(width, length, player.getSign(), 'O');
-=======
     char other = 'O';
-    Board b = Board(width, length, player.getSign(), other);
-
->>>>>>> a6907cbc9a113a6dd6f39f8d9572253f055fa6f9
     EXPECT_TRUE(player.getScore() == 2);
-
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {
             if (b.getSign(i, j) != player.getSign()) {
                 b.setSign(i, j, player.getSign());
-                player.ScoreUp(1);
+                player.scoreUp(1);
             }
         }
     }
