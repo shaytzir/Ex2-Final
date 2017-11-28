@@ -1,5 +1,8 @@
 //
-// Created by shay on 11/24/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #include <gtest/gtest.h>
@@ -7,15 +10,14 @@
 #include "../src/HumanP.h"
 #include "../src/Console.h"
 
-
 namespace {
     class Test_ReversiRules: public testing::Test {
-
     public:
         Test_ReversiRules(): rules(new HumanP('X'), new HumanP('O'), new Console()){};
 
     protected:
         ReversiRules rules;
+
     };
 }
 

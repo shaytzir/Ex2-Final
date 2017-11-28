@@ -5,8 +5,6 @@
 #include <gtest/gtest.h>
 #include "../src/HumanP.h"
 
-
-
 namespace {
     class Test_HumanP : public testing::Test {
     public:
@@ -14,9 +12,9 @@ namespace {
 
     protected:
         HumanP player;
+
     };
 }
-
 
 TEST_F(Test_HumanP, InvalidKind) {
     char kind = player.getSign();

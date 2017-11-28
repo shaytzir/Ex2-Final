@@ -1,22 +1,21 @@
 //
-// Created by shay on 11/23/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
+
 #include <gtest/gtest.h>
 #include "../src/Board.h"
 
-
-
 namespace {
     class Test_Board : public testing::Test {
-
     public:
         Test_Board() : board(8, 8) {};
     protected:
         Board board;
-
     };
 }
-
 
 TEST_F(Test_Board, checkIfInBordersFAIL)  {
     int width = board.getWidth();
@@ -26,7 +25,6 @@ TEST_F(Test_Board, checkIfInBordersFAIL)  {
     EXPECT_FALSE(board.isInBorders(width + 1, height));
     EXPECT_FALSE(board.isInBorders(width, height + 1));
     EXPECT_FALSE(board.isInBorders(width, height));
-
 }
 
 TEST_F(Test_Board, checkIfInBordersOk) {
