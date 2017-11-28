@@ -222,5 +222,6 @@ int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
             }
         }
     }
+
     return otherScore;
 }

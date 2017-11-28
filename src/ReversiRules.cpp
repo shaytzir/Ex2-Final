@@ -103,15 +103,18 @@ bool ReversiRules::isThatAnOption(string choice) {
     if (choice.length() < 3) {
         return false;
     }
-    if ((choice.at(1) != ',')) {
-        return false;
-    }
+
     int row = choice.at(0) -'0' - 1;
     int col = choice.at(2) - '0' - 1;
     //if the choice is part of the vector of choices return true
     for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+        stringstream option;
         int optionRow = movesForCurrentPlayer.at(i).x;
         int optionCol = movesForCurrentPlayer.at(i).y;
+        option << optionRow - '0' << "," << optionCol - '0';
+       /* if (strcmp(option.str() , choice) == 0) {
+            return true;
+        }*/
         if ((row == optionRow) && (col == optionCol)) {
             return true;
         }

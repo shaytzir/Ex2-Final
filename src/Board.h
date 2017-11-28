@@ -9,11 +9,14 @@
 #define EX2_BOARD_H
 
 #include <string>
+
+
 using namespace std;
 
 class Board {
 public:
     /**
+<<<<<<< HEAD
     * constructor.
     * @param wid width of table.
     * @param len length of table.
@@ -21,6 +24,15 @@ public:
     * @param second sugn of second player.
     */
     Board(int wid, int len, char first, char second);
+=======
+     * a constructor.
+     * @param wid width of table
+     * @param len length of table
+     */
+
+    Board(int wid, int len, char first, char second);
+
+>>>>>>> a6907cbc9a113a6dd6f39f8d9572253f055fa6f9
     /**
      * default constructor.
      */
