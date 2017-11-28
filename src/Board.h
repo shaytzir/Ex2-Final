@@ -14,11 +14,13 @@ using namespace std;
 class Board {
 public:
     /**
-     * a constructor.
-     * @param wid width of table
-     * @param len length of table
-     */
-    Board(int width, int length);
+    * constructor.
+    * @param wid width of table.
+    * @param len length of table.
+    * @param first sign of first player.
+    * @param second sugn of second player.
+    */
+    Board(int wid, int len, char first, char second);
     /**
      * default constructor.
      */
