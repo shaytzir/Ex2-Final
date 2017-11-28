@@ -12,7 +12,7 @@
 #include "GameFlow.h"
 #include "Console.h"
 
-int main() {
+int nomain() {
     GeneralPlayer *black, *white;
     //creates specific visualization for the current game
     Visualization* screen = new Console();

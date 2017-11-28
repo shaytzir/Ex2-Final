@@ -8,6 +8,8 @@
 #define EX2_BOARD_H
 
 #include <string>
+
+
 using namespace std;
 
 class Board {
@@ -17,7 +19,7 @@ public:
      * @param wid width of table
      * @param len length of table
      */
-    Board(int width, int length);
+    Board(int wid, int len, char first, char second);
 
     Board();
     /**

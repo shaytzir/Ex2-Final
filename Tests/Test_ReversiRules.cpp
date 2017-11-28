@@ -33,3 +33,6 @@ TEST_F(Test_ReversiRules, InvalidOptionToChoose)  {
     EXPECT_FALSE(rules.isThatAnOption("a,b"));
     EXPECT_FALSE(rules.isThatAnOption("2,5,6"));
 }
+
+
+

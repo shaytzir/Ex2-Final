@@ -11,7 +11,7 @@
 namespace {
     class Test_Board : public testing::Test {
     public:
-        Test_Board() : board(8, 8) {};
+        Test_Board() : board(8, 8, 'X', 'O') {};
     protected:
         Board board;
     };
