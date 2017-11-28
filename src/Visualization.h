@@ -1,16 +1,19 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_VISUALIZATION_H
 #define EX2_VISUALIZATION_H
-using namespace std;
+
 #include <iostream>
 #include <string>
 #include "GeneralPlayer.h"
 #include "Cell.h"
 #include "Board.h"
+using namespace std;
 
 class Visualization {
 public:
@@ -29,6 +32,5 @@ public:
     virtual void printWinner(char winner) const = 0;
     virtual void openScreen() = 0;
 };
-
 
 #endif //EX2_VISUALIZATION_H

@@ -1,6 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_GENERALPLAYER_H
@@ -9,7 +11,6 @@
 #include <string>
 #include "Board.h"
 #include "Cell.h"
-
 using namespace std;
 
 class GeneralPlayer {
@@ -41,6 +42,5 @@ protected:
     char sign_;
     int disksNum_;
 };
-
 
 #endif //EX2_GENERALPLAYER_H

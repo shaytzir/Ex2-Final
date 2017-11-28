@@ -1,8 +1,9 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
-
 #ifndef EX2_BOARD_H
 #define EX2_BOARD_H
 
@@ -17,26 +18,12 @@ public:
      * @param len length of table
      */
     Board(int width, int length);
+
     Board();
     /**
      * a destructor.
      */
     ~Board();
-
-
-    /**
-     * this function print the table of the game with the players set.
-     */
-    /*void print(Visualization* screen);
-    /**
-     *
-     * @param row row of cell to check
-     * @param col  col of cell to check
-     * @return sign of the cell row,col
-     */
-
-
-   // char whichDiskSign(int row, int col);
     /**
      *
      * @param row
@@ -73,17 +60,13 @@ public:
      * @return length of matrix
      */
     int getHeight();
-
     Board(int size, char player1, char player2);
     Board(Board *b);
     string printBoard();
     void printPositions(int i, int j);
-  //  void setStartPositions();
     void freeMatrix();
     char** getMatrix() const;
     int getSize();
-
-
 private:
     int width_;
     int length_;
@@ -92,6 +75,5 @@ private:
     char **matrix_;
     int size;
 };
-
 
 #endif //EX2_BOARD_H

@@ -1,14 +1,11 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #include "ReversiRules.h"
-#include "Cell.h"
-#include <algorithm>
-#include <sstream>
-#include <cstring>
-
 
 ReversiRules::ReversiRules(GeneralPlayer* black, GeneralPlayer* white, Visualization* screen) {
     this->board_ = new Board(8, 8);
@@ -66,7 +63,6 @@ void ReversiRules::nextTurn() {
     this->movesForCurrentPlayer = now_->getMovesForPlayer(this->board_, now_->getSign());
 }
 
-
 bool ReversiRules::gameover() {
     GeneralPlayer* temp = now_;
     if (board_->fullBoard()) {
@@ -120,7 +116,6 @@ void ReversiRules::setPlayerDisk(int row, int col) {
     board_->setSign(row, col, now_->getSign());
 }
 
-
 void ReversiRules::flipFrom(int row, int col) {
     for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
         if ((movesForCurrentPlayer[i].x == row) && (movesForCurrentPlayer[i].y == col)) {
@@ -131,7 +126,6 @@ void ReversiRules::flipFrom(int row, int col) {
         movesForCurrentPlayer[i].flip.clear();
     }
 }
-
 
 void ReversiRules::whoWon() {
     //stringstream print;

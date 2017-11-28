@@ -1,5 +1,8 @@
 //
-// Created by yuval on 23/11/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #include <sstream>
@@ -27,17 +30,15 @@ void AIPlayer::ScoreDown(int num) {
 }
 
 string AIPlayer::getNextMove(Board* gameBoard) {
-    //char **firstMatrix, **checkMatrix;
     int bestChoice[4], score = 0, alreadyChecked = -1;
     string choice;
-    //matrix_ = gameBoard->getMatrix();
     vector<cell_t> moves = getMovesForPlayer(gameBoard, this->sign_);
     //firstMatrix = checkMatrix = gameBoard->getMatrix();
     //Get the first choice score.
     bestChoice[0] = moves[0].x + 1;
     bestChoice[1] = moves[0].y + 1;
     bestChoice[2] = setPlayerDisk(moves[0], gameBoard);
-    bestChoice[4] = 0;
+    bestChoice[3] = 0;
     //Check the other scores for etch possible choice,
     // if that score is min - put it into bestChoice.
     for (int i = 1; i < moves.size(); i++) {
@@ -50,7 +51,7 @@ string AIPlayer::getNextMove(Board* gameBoard) {
             bestChoice[0] = moves[i].x + 1;
             bestChoice[1] = moves[i].y + 1;
             bestChoice[2] = score;
-            bestChoice[4] = i;
+            bestChoice[3] = i;
         }
     }
     stringstream c;
@@ -58,6 +59,7 @@ string AIPlayer::getNextMove(Board* gameBoard) {
     choice = c.str();
     return choice;
 }
+
 vector<cell_t> AIPlayer::getMovesForPlayer(Board* gameBoard, char sign) const {
     vector<cell_t> movesForCurrentPlayer;
     //finding out all locations of the current player on the board
@@ -73,6 +75,7 @@ vector<cell_t> AIPlayer::getMovesForPlayer(Board* gameBoard, char sign) const {
     }
     return movesForCurrentPlayer;
 }
+
 vector<point_t> AIPlayer::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const {
     vector<point_t> locations;
     //for each row and col in the board
@@ -111,7 +114,6 @@ vector<cell_t> AIPlayer::possibleMovesForOneDisk(char current, point_t point, Bo
                 flip.x = point.x + vertical;
                 flip.y = point.y + horizontal;
                 flippingPoints.push_back(flip);
-
                 vertical = vertical + verBackUp;
                 horizontal = horizontal + horBackUp;
             }
@@ -137,8 +139,9 @@ vector<cell_t> AIPlayer::possibleMovesForOneDisk(char current, point_t point, Bo
     }
     return possibleMoves;
 }
+
 int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
-    int otherScore, i, maxScore = 0;
+    int otherScore = -1, i, maxScore = 0;
     vector<cell_t> movesForOtherPlayer;
     char otherSign;
     Board boardCopy = new Board(gameBoard);
@@ -156,10 +159,12 @@ int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
         }
     }
     movesForOtherPlayer = getMovesForPlayer(&boardCopy, otherSign);
-    otherScore = 1 + movesForOtherPlayer[0].flip.size();
-    for (i = 1; i < movesForOtherPlayer.size(); i++) {
-        if (otherScore < (maxScore = movesForOtherPlayer[i].flip.size())) {
-            otherScore = maxScore;
+    if (!movesForOtherPlayer.empty()) {
+        otherScore = 1 + movesForOtherPlayer[0].flip.size();
+        for (i = 1; i < movesForOtherPlayer.size(); i++) {
+            if (otherScore < (maxScore = movesForOtherPlayer[i].flip.size())) {
+                otherScore = maxScore;
+            }
         }
     }
     return otherScore;

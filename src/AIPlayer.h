@@ -1,5 +1,8 @@
 //
-// Created by yuval on 23/11/17.
+// Shay Tzirin
+// ID: 315314930
+// YUval Hoch
+// 204468474
 //
 
 #ifndef EX2_AIPLAYER_H
@@ -35,7 +38,6 @@ public:
      */
     int getScore() const;
     vector<cell_t> getMovesForPlayer(Board* gameBoard, char sign) const;
-
     string getNextMove(Board* b) ;
 private:
     vector<point_t> getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const ;
@@ -43,4 +45,5 @@ private:
     int setPlayerDisk(cell_t cell, Board* gameBoard) const ;
     char** matrix_;
 };
+
 #endif //EX2_AIPLAYER_H

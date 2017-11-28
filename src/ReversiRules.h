@@ -1,6 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 #ifndef EX2_REVERSIRULES_H
 #define EX2_REVERSIRULES_H
@@ -9,11 +11,11 @@
 #include "Board.h"
 #include "GeneralPlayer.h"
 #include "Visualization.h"
-
-using namespace std;
 #include <iostream>
 #include <vector>
 #include <string>
+using namespace std;
+
 class ReversiRules {
 public:
     /**
@@ -49,7 +51,6 @@ public:
      * @return true if its a valid choice, false otherwise
      */
     bool isThatAnOption(string choice);
-
     /**
      * set the board to have the current player sign at the
      * desired position, updated scores of players according to the history
@@ -58,35 +59,6 @@ public:
      * @param col wanted col in board
      */
     void setPlayerDisk(int row, int col);
-
-    /**
-     * print the moves the player can choose from
-     */
-    //void printMovesForPlayer();
-    /**
-     * finds possible moves for current player turn
-     * @return a vector containing strings of optional moves
-     */
-    //void getMovesForPlayer();
-    /**
-     *
-     * @param sign char sign of a specific player
-     * @return all locations of that sign in the board
-     */
-    //vector<point_t> getLocationsOfPlayerOnBoard(char sign);
-    /**
-     * return possible moves of a specific disk
-     * @param current sign of the current player
-     * @param i current row of the disk
-     * @param j current col of the disk
-     * @param another the sign of the other player
-     * @return vector of possible moves for a specific disk
-     */
-    //vector<cell_t> possibleMovesForOneDisk(char current, point_t point, char another);
-    /**
-     * comparing scores and declaring
-     * who won after showing the last board
-     */
     void whoWon();
 private:
     Board* board_;
@@ -97,6 +69,5 @@ private:
     vector<cell_t> movesForCurrentPlayer;
     Visualization* screen_;
 };
-
 
 #endif //EX2_REVERSIRULES_H

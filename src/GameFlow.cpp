@@ -1,11 +1,10 @@
 //
 // Shay Tzirin
 // ID: 315314930
+// YUval Hoch
+// 204468474
 //
 #include "GameFlow.h"
-#include <iostream>
-#include <sstream>
-
 
 void GameFlow::run() {
     //stringstream toShow;
