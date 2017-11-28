@@ -1,8 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
 
 #ifndef EX2_GAMEFLOW_H
@@ -25,8 +25,9 @@ public:
      */
     ~GameFlow();
     /**
-     * this function runs the game according to a certain game logic.
-     * stops when the game is over.
+     * run.
+     * This function runs the game according to a certain game logic.
+     * Stops when the game is over.
      */
     void run();
 private:

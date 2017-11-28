@@ -1,8 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
 
 #include "GeneralPlayer.h"
@@ -19,7 +19,7 @@ int nomain() {
     int choice;
     screen->openScreen();
     cin >> choice;
-    //creates two players
+    //create two players
     if (choice == 1) {
         black = new HumanP('X');
         white = new HumanP('O');

@@ -1,8 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
 
 #ifndef REVERSI_CELL_H
@@ -12,8 +12,10 @@
 #include "Point.h"
 using namespace std;
 
-//Cell_t.
-//A struct for every cell in the board.
+/**
+ * cell_t.
+ * A struct for every cell in the board.
+ */
 struct cell_t{
     //Column.
     int x;
