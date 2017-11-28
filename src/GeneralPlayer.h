@@ -1,8 +1,8 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
 
 #ifndef EX2_GENERALPLAYER_H
@@ -16,27 +16,37 @@ using namespace std;
 class GeneralPlayer {
 public:
     /**
-     *
+     *ScoreUp.
      * @param num number of disks to add to the player's score
      */
-    virtual void ScoreUp(int num) = 0;
+    virtual void scoreUp(int num) = 0;
     /**
-     * setter
+     * scoreDown.
      * @param num a number to reduce from this player score
      */
-    virtual void ScoreDown(int num) = 0;
+    virtual void scoreDown(int num) = 0;
     /**
-     * getter
+     * getSign.
      * @return the sign of this player
      */
     virtual char getSign() const = 0;
     /**
-     * getter
+     * getScore.
      * @return the score of this player
      */
     virtual int getScore() const = 0;
-
+    /**
+     * getNextMove.
+     * @param b the board to check the next move in.
+     * @return the next move chioce.
+     */
     virtual string getNextMove(Board* b) = 0;
+    /**
+     * getMovesForPlayer.
+     * @param gameBoard the board to check on.
+     * @param sign the player sign.
+     * @return the optional moves.
+     */
     virtual vector<cell_t> getMovesForPlayer(Board* gameBoard, char sign) const = 0;
 protected:
     char sign_;

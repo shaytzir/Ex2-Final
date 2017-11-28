@@ -1,34 +1,54 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
 
 #include <iostream>
 #include "HumanP.h"
-
+/**
+ * constructor
+ * @param playerSign sets the player sign, and sets 2 disks for player
+ */
 HumanP::HumanP(char playerSign) {
     sign_ = playerSign;
     disksNum_ = 2;
 }
-
-void HumanP::ScoreUp(int num) {
+/**
+ *scoreUp.
+ * @param num number of disks to add to the player's score
+ */
+void HumanP::scoreUp(int num) {
     disksNum_ = disksNum_ + num;
 }
-
+/**
+ * getSign.
+ * @return the sign of this player
+ */
 char HumanP::getSign() const {
     return sign_;
 }
-
+/**
+ * getScore.
+ * @return the score of this player
+ */
 int HumanP::getScore() const {
     return disksNum_;
 }
-
-void HumanP::ScoreDown(int num) {
+/**
+ * scoreDown.
+ * @param num a number to reduce from this player score
+ */
+void HumanP::scoreDown(int num) {
     disksNum_ = disksNum_ - num;
 }
-
+/**
+ * getMovesForPlayer.
+ * @param gameBoard the board to check on.
+ * @param sign the player sign.
+ * @return the optional moves.
+ */
 vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
     vector<cell_t> movesForCurrentPlayer;
     //finding out all locations of the current player on the board
@@ -44,7 +64,12 @@ vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
     }
     return movesForCurrentPlayer;
 }
-
+/**
+*getLocationsOfPlayerOnBoard.
+* @param sign player sign.
+* @param gameBoard the board to check on the possible moves.
+* @return vector of type point of al this player discs on board.
+*/
 vector<point_t> HumanP::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard) const {
     vector<point_t> locations;
     //for each row and col in the board
@@ -61,7 +86,13 @@ vector<point_t> HumanP::getLocationsOfPlayerOnBoard(char sign, Board* gameBoard)
     }
     return locations;
 }
-
+/**
+*possibleMovesForOneDisk.
+* @param current sign of the current player.
+* @param point the cell to check the possible moves for.
+* @param gameBoard the board to check on.
+* @return vector of cells that are possible moves of this player on the board.
+*/
 vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Board* gameBoard) const {
     vector<cell_t> possibleMoves;
     vector<point_t> flippingPoints;
@@ -110,7 +141,11 @@ vector<cell_t> HumanP::possibleMovesForOneDisk(char current, point_t point, Boar
     }
     return possibleMoves;
 }
-
+/**
+ * getNextMove.
+ * @param b the board to check the next move in.
+ * @return the next move choice.
+ */
 string HumanP::getNextMove(Board* b) {
     string choice;
     cin >> choice;

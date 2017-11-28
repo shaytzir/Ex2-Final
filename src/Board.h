@@ -1,9 +1,10 @@
 //
 // Shay Tzirin
 // ID: 315314930
-// YUval Hoch
-// 204468474
+// Yuval Hoch
+// ID: 204468474
 //
+
 #ifndef EX2_BOARD_H
 #define EX2_BOARD_H
 
@@ -18,59 +19,69 @@ public:
      * @param len length of table
      */
     Board(int width, int length);
-
+    /**
+     * default constructor.
+     */
     Board();
     /**
      * a destructor.
      */
     ~Board();
     /**
-     *
+     *isInBorders.
      * @param row
      * @param col
      * @return yes if row,col if part of the matrix
      */
     bool isInBorders(int row, int col);
     /**
-     *
+     *fullBoard.
      * @return true if of all cells are set, otherwise false
      */
     bool fullBoard();
     /**
-     *
+     *getSign.
      * @param row
      * @param col
      * @return  the disk which is in row,col cell
      */
     char getSign(int row, int col);
     /**
-     *
+     *setSign.
      * @param row
      * @param col
      * @param sign setting the disk at the row,col cell to have another sign
      */
     void setSign(int row, int col, char sign);
     /**
-     *
+     *getWidth.
      * @return width of matrix
      */
     int getWidth();
     /**
-     *
+     *getHeight.
      * @return length of matrix
      */
     int getHeight();
-    Board(int size, char player1, char player2);
+    /**
+     * copy constructor.
+     * @param b the board to copy.
+     */
     Board(Board *b);
+    /**
+     * printBoard.
+     * @return the board as string for sending him to the visual class.
+     */
     string printBoard();
-    void printPositions(int i, int j);
-    void freeMatrix();
+    /**
+    * getMatrix.
+    * @return this board current matrix.
+    */
     char** getMatrix() const;
-    int getSize();
 private:
     int width_;
     int length_;
-    char verticalSep_; //vertical seperator
+    char verticalSep_; //vertical separator
     char horizontalSep_; //horizontal
     char **matrix_;
     int size;
