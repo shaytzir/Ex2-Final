@@ -24,6 +24,11 @@ TEST_F(Test_ReversiRules, isGameOver) {
     EXPECT_FALSE(rules.gameover());
 }
 
-/*TEST_F(Test_ReversiRules, ll)  {
-    EXPECT_FALSE(rules.isThatAnOption())
-}*/
+TEST_F(Test_ReversiRules, InvalidOptionToChoose)  {
+    EXPECT_FALSE(rules.isThatAnOption("1.1"));
+    EXPECT_FALSE(rules.isThatAnOption("0,0"));
+    EXPECT_FALSE(rules.isThatAnOption("-1,0"));
+    EXPECT_FALSE(rules.isThatAnOption("2.5,7"));
+    EXPECT_FALSE(rules.isThatAnOption("a,b"));
+    EXPECT_FALSE(rules.isThatAnOption("2,5,6"));
+}
