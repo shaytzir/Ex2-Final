@@ -12,11 +12,10 @@ namespace {
     class Test_ReversiRules: public testing::Test {
 
     public:
-        ReversiRules rules = ReversiRules(new HumanP('X'), new HumanP('O'), new Console());
+        Test_ReversiRules(): rules(new HumanP('X'), new HumanP('O'), new Console()){};
 
-        Test_ReversiRules() {
-            rules;
-        }
+    protected:
+        ReversiRules rules;
     };
 }
 

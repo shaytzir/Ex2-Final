@@ -10,11 +10,10 @@ namespace {
     class Test_Board : public testing::Test {
 
     public:
-        Board board = Board(8,8);
+        Test_Board() : board(8, 8) {};
+    protected:
+        Board board;
 
-        Test_Board() {
-            board;
-        }
     };
 }
 
