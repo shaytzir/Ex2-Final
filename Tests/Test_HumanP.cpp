@@ -29,7 +29,7 @@ TEST_F(Test_HumanP, checkScoreForPlayer) {
     EXPECT_FALSE(player.getScore() < 0);
     int width = 8;
     int length = 8;
-    Board b = Board(width, length);
+    Board b = Board(width, length, player.getSign(), 'O');
     EXPECT_TRUE(player.getScore() == 2);
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < length; j++) {

@@ -13,7 +13,7 @@
  * @param screen a screen to show the game on
  */
 ReversiRules::ReversiRules(GeneralPlayer* black, GeneralPlayer* white, Visualization* screen) {
-    this->board_ = new Board(8, 8);
+    this->board_ = new Board(8, 8, black->getSign(), white->getSign());
     this->whiteP_ = white;
     this->blackP_ = black;
     now_ = blackP_;
