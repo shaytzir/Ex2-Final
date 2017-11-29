@@ -5,6 +5,7 @@
 // ID: 204468474
 //
 
+#include <cstring>
 #include "ReversiRules.h"
 /**
  *  constructor.
@@ -35,6 +36,8 @@ void ReversiRules::nextTurn() {
     int row = 0, col = 0;
     string choice, key;
     this->screen_->printOut(this->board_);
+
+
     this->screen_->printScore(blackP_,whiteP_);
     //if the current player has no optional moves
     // he presses any key and the turn goes for the other player
@@ -57,6 +60,8 @@ void ReversiRules::nextTurn() {
             cin >> choice;
         }
     }
+
+    this->screen_->printWhichMovePlayed(now_->getSign(), choice);
     row = choice.at(0) -'0' - 1;
     col = choice.at(2) - '0' - 1;
     //set his choice to have his sign

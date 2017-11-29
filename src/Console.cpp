@@ -49,7 +49,7 @@ void Console::printNoMoreMoves(char player) const {
 void Console::printOptions(char player, vector <cell_t> moves) const {
     cout << player << ": It's your move." << '\n' << "Your possible moves: " << flush;
     this->options(moves);
-    cout << '\n' << "Please enter your move row,col: ";
+    cout << '\n' << "Please enter your move row,col: " <<endl;
 }
 /**
  * options.
@@ -105,5 +105,14 @@ void Console::printWinner(char winner) const {
  * Print out the main menu of the game.
  */
 void Console::openScreen() {
-    cout << "Please enter your option:\n(1) Tow human players.\n(2) Play against the computer." << endl;
+    cout << "Please enter your option:\n(1) Two humen players.\n(2) Play against the computer." << endl;
+}
+
+/**
+* print the last move of the last player
+*/
+void Console::printWhichMovePlayed(char player, string move) {
+    cout <<endl;
+    cout << "Player " << player << " played " << move << endl;
+
 }

@@ -20,11 +20,26 @@ namespace {
 
     };
 }
-
+/**
+ * checking game is over when the board is full or both of players
+ * have no more moves
+ */
 TEST_F(Test_ReversiRules, isGameOver) {
+    //at the start of the game, it cant be over - there are two cells of each player
     EXPECT_FALSE(rules.gameover());
-}
 
+    Board b = new Board(8,8,'X','O');
+    for (int i = 0 ; i < b.getWidth(); i++) {
+        for (int j = 0; j < b.getHeight(); j++) {
+            rules.setPlayerDisk(i,j);
+        }
+    }
+    EXPECT_TRUE(rules.gameover());
+
+}
+/**
+ * checks all of the following inputs are not valid for an option
+ */
 TEST_F(Test_ReversiRules, InvalidOptionToChoose)  {
     EXPECT_FALSE(rules.isThatAnOption("1.1"));
     EXPECT_FALSE(rules.isThatAnOption("0,0"));

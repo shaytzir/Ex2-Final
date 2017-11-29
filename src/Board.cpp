@@ -72,7 +72,6 @@ Board::Board(Board *b) {
 string Board::printBoard() {
     //creating the upper border of the table
     stringstream boardToShow;
-    boardToShow << endl;
     boardToShow << " curent board is: " << endl;
     for (int i = 0; i < width_; i++) {
         boardToShow << " | " << i+1;

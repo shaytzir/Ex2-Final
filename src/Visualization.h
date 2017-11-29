@@ -62,6 +62,11 @@ public:
     * Print out the main menu of the game.
     */
     virtual void openScreen() = 0;
+
+    /**
+     * print the last move of the last player
+     */
+    virtual void printWhichMovePlayed(char player, string move) = 0;
 };
 
 #endif //EX2_VISUALIZATION_H

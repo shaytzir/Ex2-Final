@@ -32,6 +32,9 @@ TEST_F(Test_Board, checkIfInBordersFAIL)  {
     EXPECT_FALSE(board.isInBorders(width, height));
 }
 
+/**
+ * suppose to return true for these places inputs
+ */
 TEST_F(Test_Board, checkIfInBordersOk) {
     int width = board.getWidth();
     int height = board.getHeight();
@@ -41,9 +44,14 @@ TEST_F(Test_Board, checkIfInBordersOk) {
     EXPECT_TRUE(board.isInBorders(width - 1, height -1));
 }
 
+/**
+ * checks if the board is full according to the time in the game
+ */
 TEST_F(Test_Board, BoardIsFull) {
+    //at the beginnng suppose to be false;
     EXPECT_FALSE(board.fullBoard());
 }
+
 
 TEST_F(Test_Board, BoardIsFullTrue) {
     for (int i = 0; i < board.getWidth(); i++) {
