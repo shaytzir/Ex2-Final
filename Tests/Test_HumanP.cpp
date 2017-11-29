@@ -56,11 +56,13 @@ TEST_F(Test_HumanP, checkMovesForHumanP) {
     vector<cell_t> moves = player.getMovesForPlayer(b, player.getSign());
     for (int i = 0; i < moves.size(); i++) {
         for (int j = 0 ; j < moves.size(); j++) {
-            int moveIX = moves.at(i).x;
-            int moveIY = moves.at(i).y;
-            int moveJX = moves.at(j).x;
-            int moveJY = moves.at(j).y;
-            EXPECT_FALSE((moveIX == moveJX) && (moveIY == moveJY));
+            if (i != j) {
+                int moveIX = moves.at(i).x;
+                int moveIY = moves.at(i).y;
+                int moveJX = moves.at(j).x;
+                int moveJY = moves.at(j).y;
+                EXPECT_FALSE((moveIX == moveJX) && (moveIY == moveJY));
+            }
         }
     }
 

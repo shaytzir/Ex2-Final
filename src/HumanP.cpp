@@ -50,7 +50,7 @@ void HumanP::scoreDown(int num) {
  * @return the optional moves.
  */
 vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
-    vector<cell_t> movesForCurrentPlayer;
+   /* vector<cell_t> movesForCurrentPlayer;
     //finding out all locations of the current player on the board
     vector<point_t> locations = getLocationsOfPlayerOnBoard(this->sign_, gameBoard);
     //for each location of the current player -
@@ -62,7 +62,55 @@ vector<cell_t> HumanP::getMovesForPlayer(Board* gameBoard, char sign) const {
             movesForCurrentPlayer.push_back(possibleMoves.at(move));
         }
     }
-    return movesForCurrentPlayer;
+    return movesForCurrentPlayer;*/
+
+    vector<cell_t> movesForCurrentPlayer;
+    //finding out all locations of the current player on the board
+    vector<point_t> locations = getLocationsOfPlayerOnBoard(sign, gameBoard);
+    vector<point_t> movesPoints;
+    bool add = true;
+    //for each location of the current player -
+    for (int i = 0; i < locations.size(); i++) {
+        //look for optional moves.
+        vector<cell_t> possibleMoves = possibleMovesForOneDisk(sign, locations[i], gameBoard);
+        //add for the general list of the player
+        for (int move = 0; move < possibleMoves.size(); move++) {
+            add = true;
+            struct point_t p;
+            p.x =possibleMoves[move].x;
+            p.y = possibleMoves[move].y;
+            for (int k = 0; k < movesPoints.size(); k++) {
+                if ((movesPoints[k].x == p.x) && (movesPoints[k].y == p.y)) {
+                    add = false;
+                }
+            }
+            if (add == true) {
+                movesPoints.push_back(p);
+            }
+
+            movesForCurrentPlayer.push_back(possibleMoves.at(move));
+        }
+    }
+    vector<cell_t> movesNoDuplicates;
+
+    for (int point = 0; point < movesPoints.size(); point++) {
+        int pointX = movesPoints[point].x;
+        int pointY = movesPoints[point].y;
+        vector<point_t> sharedPoints;
+        for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+            if ((movesForCurrentPlayer[i].x == pointX) && (movesForCurrentPlayer[i].y == pointY)) {
+                sharedPoints.insert(sharedPoints.end(), movesForCurrentPlayer[i].flip.begin(), movesForCurrentPlayer[i].flip.end() );
+            }
+        }
+        struct cell_t cell;
+        cell.x = pointX;
+        cell.y = pointY;
+        cell.flip = sharedPoints;
+        movesNoDuplicates.push_back(cell);
+    }
+
+    // return movesForCurrentPlayer;
+    return movesNoDuplicates;
 }
 /**
 *getLocationsOfPlayerOnBoard.

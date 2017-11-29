@@ -6,6 +6,7 @@
 //
 
 #include <sstream>
+#include <algorithm>
 #include "AIPlayer.h"
 
 /**
@@ -69,12 +70,12 @@ string AIPlayer::getNextMove(Board* gameBoard) {
     for (int i = 1; i < moves.size(); i++) {
         //If there are tow possible choice for the same cell in the matrix,
         //add this tow scores together and check from the beginning if there is lower score.
-        if (moves[i].x == bestChoice[0] && moves[i].y == bestChoice[1] && alreadyChecked != i && i != bestChoice[4]) {
+      /*  if (moves[i].x == bestChoice[0] && moves[i].y == bestChoice[1] && alreadyChecked != i && i != bestChoice[4]) {
             score = setPlayerDisk(moves[i], gameBoard);
             bestChoice[2] += score;
             alreadyChecked = i;
             i = 0;
-        } else if (bestChoice[2] > (score = setPlayerDisk(moves[i], gameBoard))) {
+        } else*/ if (bestChoice[2] > (score = setPlayerDisk(moves[i], gameBoard))) {
             //Else, if there is lower score than the current best score, replace them.
             bestChoice[0] = moves[i].x + 1;
             bestChoice[1] = moves[i].y + 1;
@@ -95,19 +96,66 @@ string AIPlayer::getNextMove(Board* gameBoard) {
  * @return the possible moves in vector of type cell.
  */
 vector<cell_t> AIPlayer::getMovesForPlayer(Board* gameBoard, char sign) const {
+    /* vector<cell_t> movesForCurrentPlayer;
+ //finding out all locations of the current player on the board
+ vector<point_t> locations = getLocationsOfPlayerOnBoard(this->sign_, gameBoard);
+ //for each location of the current player -
+ for (int i = 0; i < locations.size(); i++) {
+     //look for optional moves
+     vector<cell_t> possibleMoves = possibleMovesForOneDisk(this->sign_, locations[i], gameBoard);
+     //add for the general list of the player
+     for (int move = 0; move < possibleMoves.size(); move++) {
+         movesForCurrentPlayer.push_back(possibleMoves.at(move));
+     }
+ }
+ return movesForCurrentPlayer;*/
     vector<cell_t> movesForCurrentPlayer;
     //finding out all locations of the current player on the board
     vector<point_t> locations = getLocationsOfPlayerOnBoard(sign, gameBoard);
+    vector<point_t> movesPoints;
+    bool add = true;
     //for each location of the current player -
     for (int i = 0; i < locations.size(); i++) {
         //look for optional moves.
         vector<cell_t> possibleMoves = possibleMovesForOneDisk(sign, locations[i], gameBoard);
         //add for the general list of the player
         for (int move = 0; move < possibleMoves.size(); move++) {
+            add = true;
+            struct point_t p;
+            p.x =possibleMoves[move].x;
+            p.y = possibleMoves[move].y;
+            for (int k = 0; k < movesPoints.size(); k++) {
+                if ((movesPoints[k].x == p.x) && (movesPoints[k].y == p.y)) {
+                    add = false;
+                }
+            }
+            if (add == true) {
+                movesPoints.push_back(p);
+            }
+
             movesForCurrentPlayer.push_back(possibleMoves.at(move));
         }
     }
-    return movesForCurrentPlayer;
+    vector<cell_t> movesNoDuplicates;
+
+    for (int point = 0; point < movesPoints.size(); point++) {
+        int pointX = movesPoints[point].x;
+        int pointY = movesPoints[point].y;
+        vector<point_t> sharedPoints;
+        for (int i = 0; i < movesForCurrentPlayer.size(); i++) {
+            if ((movesForCurrentPlayer[i].x == pointX) && (movesForCurrentPlayer[i].y == pointY)) {
+                sharedPoints.insert(sharedPoints.end(), movesForCurrentPlayer[i].flip.begin(), movesForCurrentPlayer[i].flip.end() );
+            }
+        }
+        struct cell_t cell;
+        cell.x = pointX;
+        cell.y = pointY;
+        cell.flip = sharedPoints;
+        movesNoDuplicates.push_back(cell);
+    }
+
+   // return movesForCurrentPlayer;
+    return movesNoDuplicates;
 }
 /**
  *getLocationsOfPlayerOnBoard.
@@ -195,33 +243,48 @@ int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
     vector<cell_t> movesForOtherPlayer;
     char otherSign;
     Board boardCopy = new Board(gameBoard);
+    int playerAIScore = this->getScore();
+    int otherPlayerScore = 0;
     //Set the cell with this player disc.
+
     boardCopy.getMatrix()[cell.x][cell.y] = this->sign_;
+    playerAIScore += 1;
     //Set all the fliping cells of this choice with this player disc.
     for (i = 0; i < cell.flip.size(); i ++) {
         boardCopy.getMatrix()[cell.flip[i].x][cell.flip[i].y] = this->sign_;
+        playerAIScore += 1;
+
     }
     //Check the other player sign.
     for (i = 0; i < boardCopy.getHeight(); i++) {
         for (int j = 0; j < boardCopy.getWidth(); j++) {
             if (boardCopy.getMatrix()[i][j] != this->sign_ && boardCopy.getMatrix()[i][j] != ' ') {
                 otherSign = boardCopy.getMatrix()[i][j];
-                break;
+                otherPlayerScore += 1;
             }
         }
     }
     //Check the other player options after AIPlayer played his optional move.
     movesForOtherPlayer = getMovesForPlayer(&boardCopy, otherSign);
     //If other player have optional moves, set score with the maximum score he can get.
-    if (!movesForOtherPlayer.empty()) {
+  /*  if (!movesForOtherPlayer.empty()) {
         otherScore = 1 + movesForOtherPlayer[0].flip.size();
         for (i = 1; i < movesForOtherPlayer.size(); i++) {
             //Check for all the possible moves of the other player, witch is the highest.
             if (otherScore < (maxScore = movesForOtherPlayer[i].flip.size())) {
                 otherScore = maxScore;
             }
+        }*/
+
+        for (int j = 0; j < movesForOtherPlayer.size(); j++) {
+
+            int otherScore = otherPlayerScore + 1 + movesForOtherPlayer[j].flip.size() -
+                           (playerAIScore - movesForOtherPlayer[j].flip.size());
+            if (otherScore > maxScore) {
+                maxScore = otherScore;
+            }
         }
-    }
+
 
     return otherScore;
 }

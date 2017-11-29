@@ -17,6 +17,11 @@ namespace {
     };
 }
 
+/*
+ * giving as an input desired cell on the board.
+ * suppose to fail for not exsisting board cells or
+ * using any seperator but ","
+ */
 TEST_F(Test_Board, checkIfInBordersFAIL)  {
     int width = board.getWidth();
     int height = board.getHeight();

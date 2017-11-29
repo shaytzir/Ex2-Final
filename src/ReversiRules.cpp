@@ -175,5 +175,7 @@ void ReversiRules::whoWon() {
     } else {
         winner = 'T';
     }
+    this->screen_->printScore(blackP_, whiteP_);
     this->screen_->printWinner(winner);
+
 }
