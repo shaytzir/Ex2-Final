@@ -68,14 +68,7 @@ string AIPlayer::getNextMove(Board* gameBoard) {
     //Check the other scores for etch possible choice,
     // if that score is min - put it into bestChoice.
     for (int i = 1; i < moves.size(); i++) {
-        //If there are tow possible choice for the same cell in the matrix,
-        //add this tow scores together and check from the beginning if there is lower score.
-      /*  if (moves[i].x == bestChoice[0] && moves[i].y == bestChoice[1] && alreadyChecked != i && i != bestChoice[4]) {
-            score = setPlayerDisk(moves[i], gameBoard);
-            bestChoice[2] += score;
-            alreadyChecked = i;
-            i = 0;
-        } else*/ if (bestChoice[2] > (score = setPlayerDisk(moves[i], gameBoard))) {
+  if (bestChoice[2] > (score = setPlayerDisk(moves[i], gameBoard))) {
             //Else, if there is lower score than the current best score, replace them.
             bestChoice[0] = moves[i].x + 1;
             bestChoice[1] = moves[i].y + 1;
@@ -242,40 +235,31 @@ int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
     int otherScore = -1, i, maxScore = 0;
     vector<cell_t> movesForOtherPlayer;
     char otherSign;
-    Board boardCopy = new Board(gameBoard);
+    Board* boardCopy = new Board(gameBoard);
     int playerAIScore = this->getScore();
     int otherPlayerScore = 0;
     //Set the cell with this player disc.
 
-    boardCopy.getMatrix()[cell.x][cell.y] = this->sign_;
+    boardCopy->getMatrix()[cell.x][cell.y] = this->sign_;
     playerAIScore += 1;
     //Set all the fliping cells of this choice with this player disc.
     for (i = 0; i < cell.flip.size(); i ++) {
-        boardCopy.getMatrix()[cell.flip[i].x][cell.flip[i].y] = this->sign_;
+        boardCopy->getMatrix()[cell.flip[i].x][cell.flip[i].y] = this->sign_;
         playerAIScore += 1;
 
     }
     //Check the other player sign.
-    for (i = 0; i < boardCopy.getHeight(); i++) {
-        for (int j = 0; j < boardCopy.getWidth(); j++) {
-            if (boardCopy.getMatrix()[i][j] != this->sign_ && boardCopy.getMatrix()[i][j] != ' ') {
-                otherSign = boardCopy.getMatrix()[i][j];
+    for (i = 0; i < boardCopy->getHeight(); i++) {
+        for (int j = 0; j < boardCopy->getWidth(); j++) {
+            if (boardCopy->getMatrix()[i][j] != this->sign_ && boardCopy->getMatrix()[i][j] != ' ') {
+                otherSign = boardCopy->getMatrix()[i][j];
                 otherPlayerScore += 1;
             }
         }
     }
     //Check the other player options after AIPlayer played his optional move.
-    movesForOtherPlayer = getMovesForPlayer(&boardCopy, otherSign);
+    movesForOtherPlayer = getMovesForPlayer(boardCopy, otherSign);
     //If other player have optional moves, set score with the maximum score he can get.
-  /*  if (!movesForOtherPlayer.empty()) {
-        otherScore = 1 + movesForOtherPlayer[0].flip.size();
-        for (i = 1; i < movesForOtherPlayer.size(); i++) {
-            //Check for all the possible moves of the other player, witch is the highest.
-            if (otherScore < (maxScore = movesForOtherPlayer[i].flip.size())) {
-                otherScore = maxScore;
-            }
-        }*/
-
         for (int j = 0; j < movesForOtherPlayer.size(); j++) {
 
             int otherScore = otherPlayerScore + 1 + movesForOtherPlayer[j].flip.size() -
@@ -284,7 +268,7 @@ int AIPlayer::setPlayerDisk(cell_t cell, Board* gameBoard) const {
                 maxScore = otherScore;
             }
         }
-
+    delete boardCopy;
 
     return otherScore;
 }
