@@ -6,7 +6,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "../src/HumanP.h"
+#include "../HumanP.h"
 
 
 namespace {

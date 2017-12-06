@@ -6,9 +6,9 @@
 //
 
 #include <gtest/gtest.h>
-#include "../src/ReversiRules.h"
-#include "../src/HumanP.h"
-#include "../src/Console.h"
+#include "../ReversiRules.h"
+#include "../HumanP.h"
+#include "../Console.h"
 
 namespace {
     class Test_ReversiRules: public testing::Test {

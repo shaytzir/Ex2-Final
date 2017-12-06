@@ -6,7 +6,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "../src/Board.h"
+#include "../Board.h"
 
 namespace {
     class Test_Board : public testing::Test {

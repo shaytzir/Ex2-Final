@@ -6,7 +6,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "../src/AIPlayer.h"
+#include "../AIPlayer.h"
 
 
 namespace {
